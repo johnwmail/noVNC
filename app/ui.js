@@ -55,6 +55,11 @@ const UI = {
             UI.customSettings.mandatory = {};
         }
 
+        // Set default controlbar position to right
+        if (UI.customSettings.defaults.controlbar_pos === undefined) {
+            UI.customSettings.defaults.controlbar_pos = 'right';
+        }
+
         // Set up translations
         try {
             await l10n.setup(LINGUAS, "app/locale/");
@@ -107,7 +112,8 @@ const UI = {
         }
 
         // Restore control bar position
-        if (WebUtil.readSetting('controlbar_pos') === 'right') {
+        const controlbarPos = WebUtil.readSetting('controlbar_pos', 'right');
+        if (controlbarPos === 'right') {
             UI.toggleControlbarSide();
         }
 
